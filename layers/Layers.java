@@ -1,6 +1,6 @@
 package jydlet.layers;
 
-import jydlet.JydletException;
+import jydlet.NoInputSizeException;
 
 interface Layers {
 	public void build();
@@ -44,7 +44,7 @@ public class Dense implements Serializable {
 			throw new NoInputSizeException(this.name);
 		}
 
-		this.weights = new Matrix(nInputs, nNeurons, true);
+		this.weights = Matrix.tranpose(new Matrix(nInputs, nNeurons, true));
 		this.biases = new Vector(nNeurons, false);
 		this.biases.makeZeros();
 		this.build = true;

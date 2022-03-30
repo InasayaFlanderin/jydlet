@@ -1,0 +1,9 @@
+D:\project\project scrap\jydlet\JydletException.java
+D:\project\project scrap\jydlet\NoInputSizeException.java
+D:\project\project scrap\jydlet\ShapeMismatchException.java
+D:\project\project scrap\jydlet\TransposeException.java
+D:\project\project scrap\jydlet\layers\Layers.java
+D:\project\project scrap\jydlet\math\JydletMath.java
+D:\project\project scrap\jydlet\math\Matrix.java
+D:\project\project scrap\jydlet\math\Vector.java
+D:\project\project scrap\jydlet\test\dotproduct.java

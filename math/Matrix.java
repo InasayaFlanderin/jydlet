@@ -1,6 +1,6 @@
 package jydlet.math;
 
-import jydlet.JydletException;
+import jydlet.TransposeException;
 
 import java.util.Arrays;
 

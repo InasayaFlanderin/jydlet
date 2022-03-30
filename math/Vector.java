@@ -1,12 +1,14 @@
 package jydlet.math;
 
+import jydlet.TransposeException;
+
 public class Vector {
 	public double[] vector;
 	public int length;
 	public boolean horizontal;
 	public boolean full;
 
-	public Matrix(int length, boolean horizontal, boolean full) {
+	public Vector(int length, boolean horizontal, boolean full) {
 		this.vector = new double[length];
 		this.length = length;
 		this.horizontal = horizontal;
@@ -17,14 +19,14 @@ public class Vector {
 		}
 	}
 
-	public Vector(int length, int horizontal) {
+	public Vector(int length, boolean horizontal) {
 		this.vector = new double[length];
 		this.length = length;
 		this.horizontal = horizontal;
 		this.full = false;
 	}
 
-	public Matrix tranpose(Vector vector) {
+	public Vector tranpose(Vector vector) {
 		if(vector.full == false) {
 			throw new TransposeException();
 		}
@@ -40,7 +42,7 @@ public class Vector {
 		Vector result = new Vector(vector.length, horizontalv);
 
 		for(int i = 0; i < vector.length; i++) {
-			result[i] = vector[i];
+			result.vector[i] = vector.vector[i];
 		}
 
 		return result;
