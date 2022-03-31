@@ -2,6 +2,8 @@ package jydlet.math;
 
 import jydlet.TransposeException;
 
+import java.util.Arrays;
+
 public class Vector {
 	public double[] vector;
 	public int length;
@@ -72,15 +74,15 @@ public class Vector {
 		this.full = true;
 	}
 
-	public Matrix create(double[] array) {
+	public Vector create(double[] array) {
 		Vector vector = new Vector(array.length, true);
-		result.full = true;
+		vector.full = true;
 
 		for(int i = 0; i < array.length; i++) {
-			result.vector[i] = array[i];
+			vector.vector[i] = array[i];
 		}
 
-		return result;
+		return vector;
 	}
 
 	public String toString() {
