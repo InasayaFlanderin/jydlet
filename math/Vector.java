@@ -52,6 +52,8 @@ public class Vector {
 		return result;
 	}
 
+	//fill the vector with random number , one and zero
+
 	public void fill() {
 		for(int i = 0; i < this.length; i++) {
 			this.vector[i] = Math.random() * 2 - 1;

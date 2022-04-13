@@ -506,11 +506,94 @@ public class JydletMath {
 		return result;
 	}
 
+	/*
+		this inverse is using "Generalization inverse" in linear algebra
+		Generalization inverse can make sure every matrix has inverse
+		for square matrix which has det != 0, it's normal inverse (nonsingular matrix)
+		for square matrix which has det = 0 and rank r, we find the submatrix rxr which is nonsingular matrix, inverse that part then every part left is zero
+		for non-square matrix, work same for singular square matrix
+	*/
+
 	public static Matrix inverse(Matrix matrix) {
 		if(matrix.full == false) {
 			throw new EmptyException("Empty matrix");
 		}
 
-		return multiplication(1 / det(matrix), adjoint(matrix));
+		Matrix result = null;
+		int rstart = 0;
+		int cstart = 0;
+		int srank = 0;
+
+		if(matrix.rows == matrix.columns) {
+			if(det(matrix) != 0) {
+				result = multiplication(1 / det(matrix), adjoint(matrix));
+			} else {
+				int rank = Matrix.rank(matrix);
+				Matrix submatrix = null;
+
+				findinvs:
+				for(int i = 0; i < matrix.rows; i++) {
+					for(int j = 0; j < matrix.columns; j++) {
+						if(i + rank >= matrix.rows || j + rank >= matrix.columns) {
+							continue;
+						} else {
+							Matrix temp = JydletFormula.submatrix(matrix, i, j, rank);
+							if(det(temp) != 0) {
+								submatrix = multiplication(1 / det(temp), adjoint(temp));
+								rstart = i;
+								cstart = j;
+								srank = rank;
+								break findinvs;
+							}
+						}
+					}
+				}
+
+				Matrix temp = new Matrix(matrix.rows, matrix.columns);
+				for(int i = 0; i < temp.rows; i++) {
+					for(int j = 0; j < temp.columns; j++) {
+						temp.matrix[i][j] = 0;
+					}
+				}
+
+				if(submatrix != null) {
+					result = Matrix.transpose(JydletFormula.setSmatrix(temp, Matrix.transpose(submatrix), rstart, cstart, srank));
+				}
+			}
+		} else {
+			int rank = Matrix.rank(matrix);
+			Matrix submatrix = null;
+
+			findinvs:
+			for(int i = 0; i < matrix.rows; i++) {
+				for(int j = 0; j < matrix.columns; j++) {
+					if(i + rank >= matrix.rows || j + rank >= matrix.columns) {
+						continue;
+					} else {
+						Matrix temp = JydletFormula.submatrix(matrix, i, j, rank);
+						if(det(temp) != 0) {
+							submatrix = multiplication(1 / det(temp), adjoint(temp));
+							rstart = i;
+							cstart = j;
+							srank = rank;
+							break findinvs;
+						}
+					}
+				}
+			}
+
+			Matrix temp = new Matrix(matrix.rows, matrix.columns);
+			for(int i = 0; i < temp.rows; i++) {
+				for(int j = 0; j < temp.columns; j++) {
+					temp.matrix[i][j] = 0;
+				}
+			}
+
+			if(submatrix != null) {
+				result = Matrix.transpose(JydletFormula.setSmatrix(temp, Matrix.transpose(submatrix), rstart, cstart, srank));
+			}
+		}
+
+		return result;
 	}
 }

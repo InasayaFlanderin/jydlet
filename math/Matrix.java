@@ -1,6 +1,7 @@
 package jydlet.math;
 
 import jydlet.TransposeException;
+import jydlet.math.JydletMath;
 import jydlet.math.JydletFormula;
 
 import java.util.Arrays;
@@ -44,6 +45,20 @@ public class Matrix {
 		for(int i = 0; i < matrix.rows; i++) {
 			for(int j = 0; j < matrix.columns; j++) {
 				result.matrix[j][i] = matrix.matrix[i][j];
+			}
+		}
+
+		return result;
+	}
+
+	public static int rank(Matrix matrix) {
+		int result = 0;
+
+		Matrix temp = JydletMath.rref(matrix);
+
+		for(int i = 0; i < temp.rows; i++) {
+			if(!JydletFormula.isZero(Vector.create(temp.matrix[i]))) {
+				result++;
 			}
 		}
 
