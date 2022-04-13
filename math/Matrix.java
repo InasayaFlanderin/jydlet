@@ -1,8 +1,13 @@
 package jydlet.math;
 
 import jydlet.TransposeException;
+import jydlet.math.JydletFormula;
 
 import java.util.Arrays;
+
+/*
+Matrix class where we implements matrix and work with simple matrix problem
+*/
 
 public class Matrix {
 	public double[][] matrix;
@@ -28,7 +33,7 @@ public class Matrix {
 		this.full = false;
 	}
 
-	public Matrix tranpose(Matrix matrix) {
+	public static Matrix transpose(Matrix matrix) {
 		if(matrix.full == false) {
 			throw new TransposeException();
 		}
@@ -44,6 +49,8 @@ public class Matrix {
 
 		return result;
 	}
+
+	// fill the matrix with random number, zeros and ones
 
 	public void fill() {
 		for(int i = 0; i < this.rows; i++) {
@@ -75,7 +82,9 @@ public class Matrix {
 		this.full = true;
 	}
 
-	public Matrix create(double[][] array) {
+	//create matrix from 2D array
+
+	public static Matrix create(double[][] array) {
 		Matrix result = new Matrix(array.length, array[0].length);
 		result.full = true;
 
@@ -86,6 +95,28 @@ public class Matrix {
 		}
 
 		return result;
+	}
+
+	public static boolean isTriangle(Matrix matrix) {
+		if(JydletFormula.isUpperTriangle(matrix) || JydletFormula.isLowerTriangle(matrix)) {
+			return true;
+		}
+
+		if(matrix.columns == matrix.rows) {
+			for(int i = 0; i < matrix.rows; i++) {
+				if(matrix.matrix[i][i] != 0) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isEchelonForm(Matrix matrix) {
+		return JydletFormula.isEchelonForm(matrix);
 	}
 
 	public String toString() {

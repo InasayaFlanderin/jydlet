@@ -4,6 +4,8 @@ import jydlet.TransposeException;
 
 import java.util.Arrays;
 
+//work with vector and simple vector problem, same as matrix
+
 public class Vector {
 	public double[] vector;
 	public int length;
@@ -74,7 +76,7 @@ public class Vector {
 		this.full = true;
 	}
 
-	public Vector create(double[] array) {
+	public static Vector create(double[] array) {
 		Vector vector = new Vector(array.length, true);
 		vector.full = true;
 

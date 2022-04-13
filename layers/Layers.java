@@ -2,6 +2,11 @@ package jydlet.layers;
 
 import jydlet.NoInputSizeException;
 
+/*
+Layers interface implements for LayerDense, RNN cells
+getter and setter of any layers
+*/
+
 interface Layers {
 	public void build();
 	public boolean isTrainable();
@@ -11,6 +16,8 @@ interface Layers {
 	public int getNNeurons();
 	public String getName();
 }
+
+// Normal layerdense constructor
 
 public class Dense implements Serializable {
 	private boolean trainable;
@@ -38,6 +45,8 @@ public class Dense implements Serializable {
 		this.hasNInputs = false;
 		this.name = name;
 	}
+
+	// can only build if there's a enough arguments to create an layer
 
 	public void build() {
 		if(hasNInputs == false) {
