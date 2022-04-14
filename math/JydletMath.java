@@ -439,8 +439,12 @@ public class JydletMath {
 		for(int i = 0; i < temp2.rows; i++) {
 			index = i;
 
-			while(temp2.matrix[index][i] == 0 && index < temp2.rows) {
-				index++;
+			while(index < temp2.rows) {
+				if(temp2.matrix[index][i] == 0) {
+					index++;
+				} else {
+					break;
+				}
 			}
 
 			if(index == temp2.rows) {
